@@ -24,7 +24,7 @@ class PostsRepository implements IPostsRepository
         if(!empty($this->output)){
             return $this->output;
         }else{
-            throw new Exception('Posts now found!');
+            throw new Exception('Posts not found!');
         }
     }
 
@@ -34,13 +34,22 @@ class PostsRepository implements IPostsRepository
         $post->SetID($postdata->id);
         $post->SetText($postdata->text);
         $post->SetTittle($postdata->tittle);
-        return $post;
+        if(!empty($post)){
+            return $post;
+        }else{
+            throw new Exception('Post not found!');
+        }
+
     }
 
     public function NewPost(Post $post){
-        $posts = new Posts();
-        $posts->tittle = $post->GetTittle();
-        $posts->text = $post->GetText();
-        $posts->save();
+        try {
+            $posts = new Posts();
+            $posts->tittle = $post->GetTittle();
+            $posts->text = $post->GetText();
+            $posts->save();
+        }catch (Exception $exception){
+            echo $exception->getMessage();
+        }
     }
 }

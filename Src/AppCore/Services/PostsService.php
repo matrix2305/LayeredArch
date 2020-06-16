@@ -34,15 +34,25 @@ class PostsService implements IPostsService
     }
 
     public function NewPost($tittle, $text){
-        $post = new Post();
-        $post->SetTittle($tittle);
-        $post->SetText($text);
-        $this->PostRepository->NewPost($post);
+        try {
+            $post = new Post();
+            $post->SetTittle($tittle);
+            $post->SetText($text);
+            $this->PostRepository->NewPost($post);
+        }catch (Exception $exception){
+            $this->Log->AddLog($exception->getMessage());
+            return $exception->getMessage();
+        }
     }
 
     public function GetSinglePost($id){
-        $GetOnePost = $this->PostRepository->GetSinglePost($id);
-        $PostDTO = new PostDTO($GetOnePost);
-        return $PostDTO;
+        try {
+            $GetOnePost = $this->PostRepository->GetSinglePost($id);
+            $PostDTO = new PostDTO($GetOnePost);
+            return $PostDTO;
+        }catch (Exception $exception){
+            $this->Log->AddLog($exception->getMessage());
+            return $exception->getMessage();
+        }
     }
 }
