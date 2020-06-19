@@ -38,11 +38,6 @@ class Post
      */
     private $description;
 
-    /**
-     * @ORM\Column(name = "description_id", type="string")
-     */
-
-    private $descriptionId;
 
     public function __construct()
     {
@@ -70,7 +65,6 @@ class Post
 
     public function setDescrition(Description $input){
         $this->description = $input;
-        $this->descriptionId = $this->description->getId();
     }
 
 
