@@ -7,11 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use AppCore\Entities\Description;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
-use Ramsey\Uuid\Uuid;
-
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Infrastructure\Repository\PostsRepository")
  * @ORM\Table(name="posts")
  */
 class Post
@@ -39,10 +37,6 @@ class Post
     private $description;
 
 
-    public function __construct()
-    {
-        $this->id = Uuid::uuid4()->toString();
-    }
 
     public function getId()
     {

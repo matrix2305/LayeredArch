@@ -7,12 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Void_;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use AppCore\Entities\Post;
-use Ramsey\Uuid\Uuid;
 
 /**
  * Class Description
  * @package AppCore\Entities
- * @ORM\Entity
+ * @ORM\Entity (repositoryClass="Infrastructure\Repository\PostsRepository")
  * @ORM\Table (name = "description")
  */
 class Description
@@ -23,7 +22,6 @@ class Description
      * @ORM\GeneratedValue(strategy = "CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
-
     private $id;
 
     /**
@@ -35,13 +33,8 @@ class Description
     /**
      * @ORM\OneToOne(targetEntity="Post", inversedBy="description", cascade={"persist", "remove"})
      */
-    private Post $post;
+    private $post;
 
-    public function __construct(Post $post)
-    {
-        $this->id = Uuid::uuid4()->toString();
-        $this->post = $post;
-    }
 
     public function setDescription($input) : void
     {
@@ -58,5 +51,8 @@ class Description
         return $this->id;
     }
 
+    public function setPost(Post $post){
+        $this->post = $post;
+    }
 
 }

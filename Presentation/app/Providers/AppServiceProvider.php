@@ -5,6 +5,7 @@ namespace App\Providers;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Support\ServiceProvider;
 use Doctrine\Persistence\ObjectRepository;
+use \Doctrine\DBAL\Types\Type;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      *
      * @return void
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function boot()
     {
-        //
+        Type::addType('uuid', 'Ramsey\Uuid\Doctrine\UuidType');
     }
 }

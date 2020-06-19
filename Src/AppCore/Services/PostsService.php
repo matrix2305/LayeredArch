@@ -42,6 +42,7 @@ class PostsService implements IPostsService
             $description = new Description($post);
             $description->setDescription($text);
             $post->setDescrition($description);
+            $description->setPost($post);
 
             $this->PostRepository->NewPost($post, $description);
         }catch (Exception $exception){
