@@ -22,18 +22,18 @@ class Description
      * @ORM\GeneratedValue(strategy = "CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
-    private $id;
+    private string $id;
 
     /**
      * @ORM\Column(name = "description", type = "string")
      * @ORM\GeneratedValue(strategy = "AUTO")
      */
-    private $description;
+    private string $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="Post", inversedBy="description", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Post", mappedBy="description", cascade={"persist", "remove"})
      */
-    private $post;
+    private Post $post;
 
 
     public function setDescription($input) : void

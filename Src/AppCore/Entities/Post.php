@@ -23,22 +23,22 @@ class Post
      * @ORM\GeneratedValue(strategy = "CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
-    private $id;
+    private string $id;
 
     /**
      * @ORM\Column(name = "tittle", type="string")
      */
-    private $tittle;
+    private string $tittle;
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Description", mappedBy="post", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Description", inversedBy="post", cascade={"persist", "remove"})
      */
-    private $description;
+    private Description $description;
 
 
 
-    public function getId()
+    public function getId() : string
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Post
         return $this->description->description;
     }
 
-    public function setTittle($input){
+    public function setTittle(string $input){
         $this->tittle = $input;
     }
 

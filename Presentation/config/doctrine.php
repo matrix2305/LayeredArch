@@ -1,5 +1,7 @@
 <?php
 
+$vendorDir = dirname(dirname(__FILE__));
+
 return [
 
     /*
@@ -27,7 +29,7 @@ return [
             'connection'    => env('DB_CONNECTION', 'mysql'),
             'namespaces'    => [],
             'paths'         => [
-                base_path('app/Entities')
+                '../Src/AppCore/Entities/'
             ],
             'repository'    => Doctrine\ORM\EntityRepository::class,
             'proxies'       => [

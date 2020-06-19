@@ -163,9 +163,13 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
 
+
         /*
          * Package Service Providers...
          */
+
+        LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
+        LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class,
 
         /*
          * Application Service Providers...

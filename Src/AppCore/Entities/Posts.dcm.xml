@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Posts" table="posts">
+    <unique-constraints>
+      <unique-constraint name="UNIQ_885DBAFAD9F966B" columns="description_id"/>
+    </unique-constraints>
+    <id name="id" type="uuid" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tittle" type="string" column="tittle" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="description" target-entity="Description" fetch="LAZY">
+      <join-columns>
+        <join-column name="description_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

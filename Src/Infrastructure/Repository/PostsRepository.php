@@ -31,8 +31,8 @@ class PostsRepository implements IPostsRepository
     }
 
     public function NewPost(Post $post, Description $description){
-        $this->em->persist($description);
         $this->em->persist($post);
+        $this->em->persist($description);
         $this->em->flush();
     }
 }
