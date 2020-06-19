@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Support\ServiceProvider;
+use Doctrine\Persistence\ObjectRepository;
 
 class AppServiceProvider extends ServiceProvider
 {

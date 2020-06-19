@@ -10,8 +10,8 @@ class PostDTO
 
     public function __construct(Post $post)
     {
-        $this->id = $post->GetID();
-        $this->tittle = $post->GetTittle();
-        $this->text = $post->GetText();
+        $this->id = $post->getId();
+        $this->tittle = $post->getTittle();
+        $this->text = $post->getText();
     }
 }

@@ -7,6 +7,7 @@ use AppCore\Interfaces\ILog;
 use AppCore\Interfaces\IPostsRepository;
 use AppCore\Interfaces\IPostsService;
 use Mockery\Exception;
+use AppCore\Entities\Description;
 
 class PostsService implements IPostsService
 {
@@ -36,9 +37,13 @@ class PostsService implements IPostsService
     public function NewPost($tittle, $text){
         try {
             $post = new Post();
-            $post->SetTittle($tittle);
-            $post->SetText($text);
-            $this->PostRepository->NewPost($post);
+            $post->setTittle($tittle);
+
+            $description = new Description($post);
+            $description->setDescription($text);
+            $post->setDescrition($description);
+
+            $this->PostRepository->NewPost($post, $description);
         }catch (Exception $exception){
             $this->Log->AddLog($exception->getMessage());
             return $exception->getMessage();

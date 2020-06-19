@@ -3,40 +3,75 @@ declare(strict_types = 1);
 
 namespace AppCore\Entities;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use AppCore\Entities\Description;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\Uuid;
+
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="posts")
+ */
 class Post
 {
-    private $id, $tittle, $text;
+
+    /**
+     * @var \Ramsey\Uuid\UuidInterface
+     *
+     * @ORM\Id
+     * @ORM\Column(name = "id", type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy = "CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(name = "tittle", type="string")
+     */
+    private $tittle;
 
 
     /**
-     * @return integer
+     * @ORM\OneToOne(targetEntity="Description", mappedBy="post", cascade={"persist", "remove"})
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name = "description_id", type="string")
      */
 
-    public function GetID() : int
+    private $descriptionId;
+
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4()->toString();
+    }
+
+    public function getId()
     {
         return $this->id;
     }
 
-    public function GetTittle() : string
+    public function getTittle() : string
     {
         return $this->tittle;
     }
 
-    public function GetText() : string
+    public function getText() : string
     {
-        return $this->text;
+        return $this->description->description;
     }
 
-    public function SetID($input){
-        $this->id = $input;
-    }
-
-    public function SetTittle($input){
+    public function setTittle($input){
         $this->tittle = $input;
     }
 
-    public function SetText($input){
-        $this->text = $input;
+    public function setDescrition(Description $input){
+        $this->description = $input;
+        $this->descriptionId = $this->description->getId();
     }
+
 
 }
